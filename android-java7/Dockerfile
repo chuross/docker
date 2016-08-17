@@ -24,5 +24,5 @@ ENV ANDROID_COMPONENTS platform-tools, \
                       extra-google-m2repository
 
 # install Android
-RUN curl -sL "${ANDROID_SDK_URL}" | tar xz -C /usr/local
+RUN curl -sL "${ANDROID_SDK_URL}" | tar xz --no-same-owner -C /usr/local
 RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}"
