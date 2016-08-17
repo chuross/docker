@@ -8,9 +8,9 @@ RUN dpkg --add-architecture i386 \
   && apt-get clean
 
 # Android arguments
-ARG androidSdkVersion="24.4.1"
+ARG ANDROID_SDK_VERSION="24.4.1"
 
-ENV ANDROID_SDK_URL http://dl.google.com/android/android-sdk_r${androidSdkVersion}-linux.tgz
+ENV ANDROID_SDK_URL http://dl.google.com/android/android-sdk_r${ANDROID_SDK_VERSION}-linux.tgz
 ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
