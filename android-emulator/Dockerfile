@@ -14,6 +14,10 @@ ENV ANDROID_EMULATOR_NAME "armeabi-v7a-${ANDROID_TARGET_API}"
 ENV ANDROID_EMULATOR_COMPONENTS $ANDROID_TARGET_API,sys-img-${ANDROID_EMULATOR_NAME}
 ENV ANDROID_EMULATOR_PATH $ANDROID_HOME/../emulators
 ENV ANDROID_EMULATOR_PORT 5554
+ENV ADB_PORT 5555
+
+EXPOSE $ADB_PORT
+EXPOSE $ANDROID_EMULATOR_PORT
 
 RUN apt-get install -y socat net-tools
 
@@ -26,8 +30,7 @@ RUN android list targets \
                                   -n $ANDROID_EMULATOR_NAME \
                                   -t $ANDROID_TARGET_API \
                                   -c $ANDROID_EMULATOR_STORAGE_SIZE \
-                                  -s $ANDROID_EMULATOR_SKIN \
-                                  -p $ANDROID_EMULATOR_PORT
+                                  -s $ANDROID_EMULATOR_SKIN
 
 WORKDIR /usr/local
 
