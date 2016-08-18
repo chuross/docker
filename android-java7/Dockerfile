@@ -16,8 +16,6 @@ ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
 # Android components
 ENV ANDROID_COMPONENTS platform-tools, \
-                      build-tools-23.0.3, \
-                      android-23, \
                       extra-android-support, \
                       extra-android-m2repository, \
                       extra-google-google_play_services, \

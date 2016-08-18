@@ -11,18 +11,27 @@ ENV ANDROID_EMULATOR_STORAGE_SIZE $STORAGE_SIZE
 ENV ANDROID_EMULATOR_SKIN $SKIN
 ENV ANDROID_EMULATOR_MEMORY 1024
 ENV ANDROID_EMULATOR_NAME "armeabi-v7a-${ANDROID_TARGET_API}"
-ENV ANDROID_EMULATOR_COMPONENTS "${ANDROID_TARGET_API},sys-img-${ANDROID_EMULATOR_NAME}"
+ENV ANDROID_EMULATOR_COMPONENTS $ANDROID_TARGET_API,sys-img-${ANDROID_EMULATOR_NAME}
 ENV ANDROID_EMULATOR_PATH $ANDROID_HOME/../emulators
 ENV ANDROID_EMULATOR_PORT 5554
 
 RUN apt-get install -y socat net-tools
+
+WORKDIR $ANDROID_HOME
+RUN rm -rf platforms/$ANDROID_TARGET_API
 RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_EMULATOR_COMPONENTS}"
+
+RUN android list targets \
+      && echo no | android create avd --force \
+                                  -n $ANDROID_EMULATOR_NAME \
+                                  -t $ANDROID_TARGET_API \
+                                  -c $ANDROID_EMULATOR_STORAGE_SIZE \
+                                  -s $ANDROID_EMULATOR_SKIN \
+                                  -p $ANDROID_EMULATOR_PORT
 
 WORKDIR /usr/local
 
 COPY emulator.sh /usr/local
 RUN chmod +x emulator.sh
 
-RUN sh emulator.sh
-
-CMD ["adb", "devices"]
+CMD ["sh", "emulator.sh"]
