@@ -23,4 +23,4 @@ ENV ANDROID_COMPONENTS platform-tools, \
 
 # install Android
 RUN curl -sL "${ANDROID_SDK_URL}" | tar xz --no-same-owner -C /usr/local
-RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}"
+RUN echo y | android update sdk --no-ui -t "${ANDROID_COMPONENTS}" || true
