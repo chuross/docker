@@ -15,12 +15,8 @@ ENV ANDROID_HOME /usr/local/android-sdk-linux
 ENV PATH ${ANDROID_HOME}/tools:$ANDROID_HOME/platform-tools:$PATH
 
 # Android components
-ENV ANDROID_COMPONENTS platform-tools, \
-                      extra-android-support, \
-                      extra-android-m2repository, \
-                      extra-google-google_play_services, \
-                      extra-google-m2repository
+ENV ANDROID_COMPONENTS platform-tools
 
 # install Android
 RUN curl -sL "${ANDROID_SDK_URL}" | tar xz --no-same-owner -C /usr/local
-RUN echo y | android update sdk --no-ui -t "${ANDROID_COMPONENTS}" || true
+RUN echo y | android update sdk --no-ui --all --filter "${ANDROID_COMPONENTS}"
