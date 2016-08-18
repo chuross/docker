@@ -30,7 +30,8 @@ RUN android list targets \
                                   -n $ANDROID_EMULATOR_NAME \
                                   -t $ANDROID_TARGET_API \
                                   -c $ANDROID_EMULATOR_STORAGE_SIZE \
-                                  -s $ANDROID_EMULATOR_SKIN
+                                  -s $ANDROID_EMULATOR_SKIN \
+      && echo hw.ramSize=$ANDROID_EMULATOR_MEMORY >> ~/.android/avd/${ANDROID_EMULATOR_NAME}.ini
 
 WORKDIR /usr/local
 
