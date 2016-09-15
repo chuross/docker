@@ -10,6 +10,7 @@ stf:
     - 3000:3000
     - 7100:7100
     - 7110:7110
+    - 7400:7400
   environment:
    STF_PUBLIC_IP: "${STF_PUBLIC_IP}"
   command: stf local --public-ip "${STF_PUBLIC_IP}"
