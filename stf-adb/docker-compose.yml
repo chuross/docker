@@ -1,0 +1,19 @@
+stf:
+  image: chuross/stf-adb:latest
+  container_name: stf
+  links:
+    - rethinkdb
+  ports:
+    - 3000:3000
+    - 7100:7100
+  environment:
+    STF_PUBLIC_IP: "${STF_PUBLIC_IP}"
+  command: stf local --public-ip "${STF_PUBLIC_IP}"
+
+rethinkdb:
+  image: rethinkdb:latest
+  container_name: rethinkdb
+  ports:
+    - 8080
+    - 28015
+    - 29015
