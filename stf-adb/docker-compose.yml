@@ -1,13 +1,17 @@
 stf:
   image: chuross/stf-adb:latest
   container_name: stf
+  privileged: true
+  volumes:
+    - /dev/bus/usb:/dev/bus/usb
   links:
     - rethinkdb
   ports:
     - 3000:3000
     - 7100:7100
+    - 7110:7110
   environment:
-    STF_PUBLIC_IP: "${STF_PUBLIC_IP}"
+   STF_PUBLIC_IP: "${STF_PUBLIC_IP}"
   command: stf local --public-ip "${STF_PUBLIC_IP}"
 
 rethinkdb:
